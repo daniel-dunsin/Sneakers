@@ -1,8 +1,8 @@
 const images = [
-  { id: 1, src: "/assets/images/image-product-1.jpg" },
-  { id: 2, src: "/assets/images/image-product-2.jpg" },
-  { id: 3, src: "/assets/images/image-product-3.jpg" },
-  { id: 4, src: "/assets/images/image-product-4.jpg" },
+  { id: 1, src: "assets/images/image-product-1.jpg" },
+  { id: 2, src: "assets/images/image-product-2.jpg" },
+  { id: 3, src: "assets/images/image-product-3.jpg" },
+  { id: 4, src: "assets/images/image-product-4.jpg" },
 ];
 
 const menuIcon = document.querySelector(".menu-container");
@@ -12,6 +12,12 @@ const cartIcon = document.querySelector(".cart-icon-container");
 const cartContainer = document.querySelector(".cart-container");
 const cartItemsContainer = document.querySelector(".cart-items-container");
 const mainImageContainer = document.querySelector(".main-image-container img");
+const imagesModalContainer = document.querySelector(".images-modal");
+const closeModalIcon = document.querySelector(".close-modal-icon");
+const modalImage = document.querySelector(".images-modal .image-container img");
+const modalNextButton = document.querySelector(".images-modal .next");
+const modalPrevButton = document.querySelector(".images-modal .prev");
+
 const thumbnailImagesContainer = document.querySelectorAll(
   ".thumbnail-image-container img"
 );
@@ -34,6 +40,7 @@ const price = 125;
 let mobileImagesCount = 0;
 let inCart = false;
 let quantity = 0;
+let modalImageCount = 0;
 
 // ========= FUNCTIONS ============
 const openSidebar = () => {
@@ -44,6 +51,30 @@ const closeSidebar = () => {
 };
 const toggleCartContainer = () => {
   cartContainer.classList.toggle("open");
+};
+const openModalImage = (image) => {
+  modalImageCount = images.findIndex((data) => data.src === image);
+  modalImage.src = images[modalImageCount].src;
+  imagesModalContainer.classList.add("open");
+};
+const closeModalImage = () => {
+  imagesModalContainer.classList.remove("open");
+};
+const updateModalImage = (actionType) => {
+  if (actionType === "increase") {
+    if (modalImageCount === images.length - 1) {
+      modalImageCount = 0;
+    } else {
+      modalImageCount = modalImageCount + 1;
+    }
+  } else if (actionType === "decrease") {
+    if (modalImageCount === 0) {
+      modalImageCount = images.length - 1;
+    } else {
+      modalImageCount = modalImageCount - 1;
+    }
+  }
+  modalImage.src = images[modalImageCount].src;
 };
 const changeMainImage = (e) => {
   const newImage = e.target.src.split("-").slice(0, 3).join("-") + ".jpg";
@@ -199,6 +230,19 @@ decreaseQuantityEl.addEventListener("click", () => {
   updateProductQuantity("decrease");
 });
 addToCartBtn.addEventListener("click", addItemToCart);
+mainImageContainer.addEventListener("click", (e) => {
+  const image = e.target.src.split("/").slice(3).join("/");
+  openModalImage(image);
+});
+closeModalIcon.addEventListener("click", () => {
+  closeModalImage();
+});
+modalNextButton.addEventListener("click", () => {
+  updateModalImage("increase");
+});
+modalPrevButton.addEventListener("click", () => {
+  updateModalImage("decrease");
+});
 window.addEventListener("DOMContentLoaded", () => {
   updateCartDisplay(false);
 });
