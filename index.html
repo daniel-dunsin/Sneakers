@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce Product Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <nav>
+        <div class="navbar-brand">
+          <div class="menu-container">
+            <img src="./assets/images/icon-menu.svg" alt="icon-menu" />
+          </div>
+          <img src="./assets/images/logo.svg" class="logo" alt="logo" />
+        </div>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <span class="close-icon"
+              ><img src="/assets/images/icon-close.svg" alt="close-icon"
+            /></span>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="profile-container">
+          <div class="cart-icon-container">
+            <img src="/assets/images/icon-cart.svg" alt="cart-icon" />
+          </div>
+          <div class="profile-picture">
+            <img src="/assets/images/image-avatar.png" alt="user" />
+          </div>
+          <div class="cart-container">
+            <header>
+              <h1>Cart</h1>
+            </header>
+            <div class="cart-items-container">
+              <div class="cart-item">
+                <div class="image-container">
+                  <img
+                    src="/assets/images/image-product-1-thumbnail.jpg"
+                    alt="cart-item"
+                  />
+                </div>
+                <div class="item-details">
+                  <h2>Fall Limited Edition Sneakers</h2>
+                  <p class="price">$120 * 3 <span>$375.00</span></p>
+                </div>
+                <div class="delete-icon">
+                  <img src="./assets/images/icon-delete.svg" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="clear-cart-container">
+              <button class="clear-cart">Checkout</button>
+            </div>
+
+            <!-- <div class="no-items">
+              <p>Your cart is empty</p>
+            </div> -->
+          </div>
+        </div>
+      </nav>
+
+      <aside class="images-modal">
+        <div>
+          <span class="close-modal-icon">
+            <img src="/assets/images/icon-close-orange.svg" alt="" />
+          </span>
+          <div class="image-container">
+            <img src="/assets/images/image-product-1.jpg" alt="" />
+          </div>
+          <aside class="prev">
+            <img src="/assets/images/icon-previous.svg" alt="previous" />
+          </aside>
+          <aside class="next">
+            <img src="/assets/images/icon-next.svg" alt="next" />
+          </aside>
+        </div>
+      </aside>
+      <section class="product-container">
+        <div class="mobile-images">
+          <aside class="prev">
+            <img src="/assets/images/icon-previous.svg" alt="previous" />
+          </aside>
+          <div class="image">
+            <img src="./assets/images/image-product-1.jpg" alt="product-1" />
+          </div>
+          <!-- <div class="image">
+            <img src="./assets/images/image-product-2.jpg" alt="product-2" />
+          </div>
+          <div class="image">
+            <img src="./assets/images/image-product-3.jpg" alt="product-3" />
+          </div>
+          <div class="image">
+            <img src="./assets/images/image-product-4.jpg" alt="product-4" />
+          </div> -->
+          <aside class="next">
+            <img src="/assets/images/icon-next.svg" alt="next" />
+          </aside>
+        </div>
+        <div class="product-images">
+          <div class="main-image-container">
+            <img src="/assets/images/image-product-1.jpg" alt="product-1" />
+          </div>
+          <div class="thumbnail-images">
+            <div class="thumbnail-image-container">
+              <img
+                src="/assets/images/image-product-1-thumbnail.jpg"
+                alt="product-1"
+              />
+            </div>
+            <div class="thumbnail-image-container">
+              <img
+                src="/assets/images/image-product-2-thumbnail.jpg"
+                alt="product-2"
+              />
+            </div>
+            <div class="thumbnail-image-container">
+              <img
+                src="/assets/images/image-product-3-thumbnail.jpg"
+                alt="product-3"
+              />
+            </div>
+            <div class="thumbnail-image-container">
+              <img
+                src="/assets/images/image-product-4-thumbnail.jpg"
+                alt="product-4"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="product-details">
+          <h3 class="subtitle">SNEAKER COMPANY</h3>
+          <h1 class="title">Fall Limited Edition Sneakers</h1>
+          <p class="desc">
+            These low profile sneakers are perfect casual wear companion.
+            Featuring a durable rubber outer sole, they'll withstand everything
+            the weather has to offer
+          </p>
+          <div class="price-container">
+            <div class="price-and-discount">
+              <h2>$125.00</h2>
+              <span>50%</span>
+            </div>
+            <h2 class="original-price">$250.00</h2>
+          </div>
+          <section class="control">
+            <div class="quantity-control">
+              <span>
+                <img src="./assets/images/icon-minus.svg" alt="decrease" />
+              </span>
+              <span class="quantity">
+                <p>0</p>
+              </span>
+              <span>
+                <img src="/assets/images/icon-plus.svg" alt="increase" />
+              </span>
+            </div>
+            <button class="add-to-cart">
+              <span>
+                <img src="/assets/images/icon-cart-white.svg" alt="cart-icon" />
+              </span>
+              <p>Add to cart</p>
+            </button>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
