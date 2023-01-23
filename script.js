@@ -10,6 +10,7 @@ const closeIcon = document.querySelector(".close-icon");
 const navLinksContainer = document.querySelector(".nav-links-container");
 const cartIcon = document.querySelector(".cart-icon-container");
 const cartContainer = document.querySelector(".cart-container");
+const cartItemsContainer = document.querySelector(".cart-items-container");
 const mainImageContainer = document.querySelector(".main-image-container img");
 const thumbnailImagesContainer = document.querySelectorAll(
   ".thumbnail-image-container img"
@@ -19,15 +20,20 @@ const mobileImagesContainer = document.querySelector(
 );
 const mobileImageNextButton = document.querySelector(".mobile-images .next");
 const mobileImagePrevButton = document.querySelector(".mobile-images .prev");
-
-console.log(
-  mobileImageNextButton,
-  mobileImagePrevButton,
-  mobileImagesContainer
+const quantityControlEl = document.querySelector(".control .quantity p");
+const increaseQuantityEl = document.querySelector(
+  ".control .increase-quantity"
 );
+const decreaseQuantityEl = document.querySelector(
+  ".control .decrease-quantity"
+);
+const addToCartBtn = document.querySelector(".add-to-cart");
 
 // ========= CUSTOM VARIABLES ===========
+const price = 125;
 let mobileImagesCount = 0;
+let inCart = false;
+let quantity = 0;
 
 // ========= FUNCTIONS ============
 const openSidebar = () => {
@@ -72,6 +78,111 @@ const decreaseMobileImage = () => {
   changeMobileImage(mobileImagesCount);
 };
 
+const updateProductQuantity = (actionType) => {
+  if (!addToCartBtn.disabled) {
+    if (actionType === "increase") {
+      quantity = quantity + 1;
+    } else if (actionType === "decrease") {
+      if (quantity !== 0) {
+        quantity = quantity - 1;
+      }
+    }
+    quantityControlEl.textContent = quantity;
+  }
+};
+const updateButtonDisability = (type) => {
+  if (type === true) {
+    addToCartBtn.disabled = true;
+    addToCartBtn.style.opacity = "0.85";
+    addToCartBtn.textContent = "In Cart";
+  }
+  if (type === false) {
+    addToCartBtn.disabled = false;
+    addToCartBtn.style.opacity = 1;
+    addToCartBtn.innerHTML = `
+    <span>
+      <img src="/assets/images/icon-cart-white.svg" alt="cart-icon" />
+    </span>
+    <p>Add to cart</p>
+    `;
+  }
+};
+
+const updateCartDisplay = (inCart) => {
+  if (inCart) {
+    cartContainer.classList.add("open");
+    cartContainer.innerHTML = `
+    <header>
+    <h1>Cart</h1>
+    </header>
+    <div class="cart-items-container">
+      <div class="cart-item">
+        <div class="image-container">
+          <img
+            src="/assets/images/image-product-1-thumbnail.jpg"
+            alt="cart-item"
+          />
+        </div>
+        <div class="item-details">
+          <h2>Fall Limited Edition Sneakers</h2>
+          <p class="price">$${price} * ${quantity} <span>$${
+      price * quantity
+    }</span></p>
+        </div>
+        <div class="delete-icon">
+          <img src="./assets/images/icon-delete.svg" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="clear-cart-container">
+      <button class="clear-cart">Checkout</button>
+    </div>
+    `;
+
+    const clearCartButton = document.querySelector(".clear-cart");
+    const deleteButton = document.querySelector(".delete-icon");
+    clearCartButton.addEventListener("click", clearCart);
+    deleteButton.addEventListener("click", deleteItem);
+  } else {
+    cartContainer.innerHTML = `
+    <header>
+      <h1>Cart</h1>
+    </header>
+    <div class="cart-items-container">
+      
+    </div>
+    <div class="no-items">
+        <p>Your cart is empty</p>
+    </div>
+    `;
+  }
+};
+function clearCart() {
+  quantity = 0;
+  inCart = false;
+  cartContainer.classList.remove("open");
+  updateButtonDisability(false);
+  updateProductQuantity();
+  updateCartDisplay(inCart);
+}
+
+function deleteItem() {
+  quantity = 0;
+  inCart = false;
+  updateButtonDisability(false);
+  updateCartDisplay(inCart);
+  updateProductQuantity();
+}
+
+const addItemToCart = () => {
+  if (quantity !== 0) {
+    inCart = true;
+    addToCartBtn.disabled = true;
+    updateButtonDisability(true);
+    updateCartDisplay(inCart);
+  }
+};
+
 // ========= EVENT LISTENERS ===========
 menuIcon.addEventListener("click", openSidebar);
 closeIcon.addEventListener("click", closeSidebar);
@@ -81,3 +192,13 @@ thumbnailImagesContainer.forEach((container) => {
 });
 mobileImageNextButton.addEventListener("click", increaseMobileImage);
 mobileImagePrevButton.addEventListener("click", decreaseMobileImage);
+increaseQuantityEl.addEventListener("click", () => {
+  updateProductQuantity("increase");
+});
+decreaseQuantityEl.addEventListener("click", () => {
+  updateProductQuantity("decrease");
+});
+addToCartBtn.addEventListener("click", addItemToCart);
+window.addEventListener("DOMContentLoaded", () => {
+  updateCartDisplay(false);
+});
