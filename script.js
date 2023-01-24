@@ -77,8 +77,12 @@ const updateModalImage = (actionType) => {
   modalImage.src = images[modalImageCount].src;
 };
 const changeMainImage = (e) => {
-  const newImage = e.target.src.split("-").slice(0, 3).join("-") + ".jpg";
-  mainImageContainer.src = newImage;
+  const newImage = images.find((image) =>
+    e.target.src
+      .slice(0, e.target.src.indexOf(".jpg"))
+      .includes(image.src.slice(0, image.src.indexOf(".jpg")))
+  );
+  mainImageContainer.src = newImage.src;
   e.target.classList.add("is-clicked");
   thumbnailImagesContainer.forEach((imgContainer) => {
     if (imgContainer !== e.target) {
@@ -231,7 +235,7 @@ decreaseQuantityEl.addEventListener("click", () => {
 });
 addToCartBtn.addEventListener("click", addItemToCart);
 mainImageContainer.addEventListener("click", (e) => {
-  const image = e.target.src.split("/").slice(3).join("/");
+  const image = e.target.src.slice(e.target.src.indexOf("assets"));
   openModalImage(image);
 });
 closeModalIcon.addEventListener("click", () => {

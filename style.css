@@ -309,6 +309,7 @@ nav {
 .control {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
 .quantity-control {
@@ -333,7 +334,7 @@ nav {
 }
 .add-to-cart {
   all: unset;
-  width: 200px;
+  width: 180px;
   padding: 0.5rem;
   background-color: var(--main-orange);
   color: white;
@@ -524,5 +525,11 @@ nav {
   }
   .images-modal {
     display: none;
+  }
+  .product-details {
+    padding: 1rem;
+  }
+  .add-to-cart {
+    width: 150px;
   }
 }
